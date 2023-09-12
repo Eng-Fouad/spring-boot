@@ -162,7 +162,7 @@ public class SpringBootAotPlugin implements Plugin<Project> {
 			classpath.attributes((attributes) -> {
 				AttributeContainer baseAttributes = base.getAttributes();
 				for (Attribute<?> attribute : baseAttributes.keySet()) {
-					attributes.attribute((Attribute<Object>) attribute, baseAttributes.getAttribute(attribute));
+					attributes.attributeProvider(attribute, project.getProviders().provider(() -> baseAttributes.getAttribute(attr)));
 				}
 			});
 		});
